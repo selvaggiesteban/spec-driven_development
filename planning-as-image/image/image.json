@@ -1,0 +1,141 @@
+{
+  "output": {
+    "language": "en",
+    "aspect_ratio": "9:16",
+    "orientation": "vertical",
+    "resolution": "high"
+  },
+
+  "metadata": {
+    "confidence_score": "high",
+    "image_type": "photograph",
+    "primary_purpose": "social media/product marketing/UGC"
+  },
+
+  "composition": {
+    "rule_applied": "center composition",
+    "aspect_ratio": "4:5 vertical",
+    "layout": "single subject",
+    "focal_points": [
+      "Dollop of cream on hand",
+      "Subject's peaceful face",
+      "Product tube (Satin Hands)"
+    ],
+    "visual_hierarchy": "Eye follows the gaze of the subject down to the product tube and the cream being dispensed on the palm",
+    "balance": "asymmetric - activity focused on left side of frame, balanced by lighting"
+  },
+
+  "color_profile": {
+    "dominant_colors": [
+      {
+        "color": "Bright White",
+        "hex": "#F5F5F7",
+        "percentage": "40%",
+        "role": "clothing/cream"
+      },
+      {
+        "color": "Golden Tan Skin",
+        "hex": "#D6A57C",
+        "percentage": "30%",
+        "role": "subject skin"
+      },
+      {
+        "color": "Sage Green",
+        "hex": "#C8D69B",
+        "percentage": "10%",
+        "role": "product packaging"
+      },
+      {
+        "color": "Deep Shadow Grey",
+        "hex": "#2A2829",
+        "percentage": "20%",
+        "role": "background/shadows"
+      }
+    ],
+    "color_palette": "warm neutrals with high contrast",
+    "temperature": "warm (golden hour sunlight)",
+    "saturation": "moderate/natural",
+    "contrast": "high contrast (direct sunlight)"
+  },
+
+  "lighting": {
+    "type": "natural sunlight",
+    "source_count": "single strong source",
+    "direction": "front/side (from left)",
+    "directionality": "highly directional/hard",
+    "quality": "hard light (creating distinct shadows)",
+    "intensity": "bright/sun-drenched",
+    "contrast_ratio": "high contrast",
+    "mood": "warm/relaxed/sunny/peaceful",
+    "light_temperature": "warm golden",
+    "ambient_fill": "low (shadows are deep)",
+
+    "shadows": {
+      "type": "harsh defined edges",
+      "density": "dark",
+      "placement": "on shirt folds/right side of face/behind subject",
+      "length": "medium"
+    },
+
+    "highlights": {
+      "treatment": "bright/sunlit",
+      "placement": "hair strands/shoulder/nose bridge/forehead"
+    }
+  },
+
+  "technical_specs": {
+    "medium": "digital photography (smartphone)",
+    "style": "lifestyle/candid/influencer",
+    "texture": "smooth fabric/skin",
+    "sharpness": "sharp on subject",
+    "grain": "none",
+    "depth_of_field": "medium - background is dark and out of focus",
+    "perspective": "slightly low angle/eye level"
+  },
+
+  "camera_emulation": {
+    "device_look": "simulate iPhone 16 Pro Max main camera photo",
+    "lens_equivalent": "1x main camera look (approx 24–28mm equivalent)",
+    "processing_notes": [
+      "natural iPhone-style HDR but not overprocessed",
+      "subtle edge sharpening, realistic micro-contrast",
+      "skin texture preserved (no smoothing / no beauty mode)",
+      "accurate skin tones, controlled highlights, no halos"
+    ]
+  },
+
+  "post_processing": {
+    "color_grade": "natural-warm, slightly cinematic but still realistic",
+    "grain": "almost none (very subtle sensor noise only)",
+    "avoid": [
+      "heavy HDR halos",
+      "over-saturation",
+      "over-sharpened crunchy skin"
+    ]
+  },
+
+  "artistic_elements": {
+    "genre": "lifestyle/beauty product",
+    "influences": [
+      "Golden hour photography",
+      "Instagram influencer style",
+      "Self-care aesthetic"
+    ],
+    "mood": "serene/warm/content",
+    "atmosphere": "Sun-filled afternoon, relaxing routine",
+    "visual_style": "high contrast/warm/sunny"
+  },
+
+  "typography": {
+    "present": true,
+    "fonts": [
+      {
+        "type": "serif/sans-serif mix",
+        "weight": "regular",
+        "characteristics": "elegant/classic (on product)"
+      }
+    ],
+    "placement": "on product tube",
+    "integration": "visible branding"
+  }
+}

@@ -1,0 +1,982 @@
+{
+  "name": "VSL Scraper + Writer - Shared",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5089cc47-7e0e-4a5e-b7bb-f5f08818386c",
+              "name": "ad_id",
+              "value": "=https://www.facebook.com/ads/library/?id={{ $json['Facebook ad ID:'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        80
+      ],
+      "id": "09bb3e68-0ce7-4405-b194-dccc7a2f6a1c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "formTitle": "Facebook Script Generator",
+        "formDescription": "Enter yor ad ID or Instagram URL",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Facebook ad ID:"
+            },
+            {
+              "fieldLabel": "Instagram URL"
+            },
+            {
+              "fieldLabel": "Brand Guidelines",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Product Info ",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -360,
+        500
+      ],
+      "id": "4eee52da-5b47-4163-9dfe-e74baf093c03",
+      "name": "On form submission",
+      "webhookId": "14f5bfd0-4bd7-433b-b965-f95b4aedaab4"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['Facebook ad ID:'] }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    },
+                    "id": "5a33ef21-5d1d-4f93-8871-c1c6964ce82b"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "bf638f48-c1dc-47e2-a948-fe91974f8400",
+                    "leftValue": "={{ $json['Instagram URL'] }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -200,
+        500
+      ],
+      "id": "876dae48-c55d-43d1-aae1-6d843163f914",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "content": "## Facebook Ad\n",
+        "height": 400,
+        "width": 220
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -60
+      ],
+      "id": "1c1c71a3-b37a-4f15-80e5-fd952f2d3737",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Instagram Reel \n",
+        "height": 400,
+        "width": 220
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        60,
+        400
+      ],
+      "id": "6ec89fef-20c0-4194-b1e6-c2ab500c07df",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "=You are given a short-form video ad script originally used to promote another product. Your task is to rewrite it to promote our product/brand — while keeping the original **structure, pacing, and flow** intact.\n\nOriginal Script: {{ $json.text }}\n\nBrand & Product Context:\n- Brand Guidelines: {{ $('On form submission').item.json['Brand Guidelines'] }}\n- Product/Service: {{ $('On form submission').item.json['Product Info '] }}\n\n\nRewrite the script as if it's going to be used in a Facebook or Instagram video ad (e.g. Reels, Stories, feed video). Make it feel native to the platform — fast-paced, engaging, and emotionally resonant.\n\nDeliver two versions:\n1. **UGC-style** — sounds like a real person (customer/influencer/founder) speaking casually to camera.\n2. **VSL-style** — structured persuasion with Hook → Pain → Product → Benefit → CTA.\n\nGuidelines:\n\n- Match the **scene order and energy** of the original.\n- Make it feel authentic and unscripted.\n- Speak directly to the viewer.\n- Emphasize product benefits and emotional triggers that resonate with our target audience.\n\nReturn both scripts clearly labeled and ready to be filmed.",
+        "options": {
+          "systemMessage": "=You are a senior scriptwriter specializing in high-performing short-form video ads for Facebook and Instagram. You rewrite existing video ad scripts (VSL or UGC-style) to align with a new brand and product — while preserving the structure, flow, and pacing of the original.\n\nYour goals:\n- Make the script attention-grabbing from the first 3 seconds.\n- Rewrite the content to reflect a different brand’s tone, audience, and product.\n- Maintain a natural, unscripted tone suitable for Facebook/Instagram Reels and feed ads.\n- Make the script sound like a real person (e.g. customer, influencer, founder).\n\nEvery output should feel native to Facebook/Instagram, emotionally engaging, and optimized for conversions.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1260,
+        80
+      ],
+      "id": "16ec90dc-35bb-4b90-b0c0-e9a782835767",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1060,
+        520
+      ],
+      "id": "eea57f79-f5aa-4e08-893a-3f891c163c02",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "=You are given a short-form video ad script originally used to promote another product. Your task is to rewrite it to promote our product/brand — while keeping the original **structure, pacing, and flow** intact.\n\nOriginal Script: {{ $json.text }}\n\nBrand & Product Context:\n- Brand Guidelines: {{ $('On form submission').item.json['Brand '] }}\n- Product/Service: {{ $('On form submission').item.json['Product Info '] }}\n\n\nRewrite the script as if it's going to be used in a Facebook or Instagram video ad (e.g. Reels, Stories, feed video). Make it feel native to the platform — fast-paced, engaging, and emotionally resonant.\n\nDeliver two versions:\n1. **UGC-style** — sounds like a real person (customer/influencer/founder) speaking casually to camera.\n2. **VSL-style** — structured persuasion with Hook → Pain → Product → Benefit → CTA.\n\nGuidelines:\n\n- Match the **scene order and energy** of the original.\n- Make it feel authentic and unscripted.\n- Speak directly to the viewer.\n- Emphasize product benefits and emotional triggers that resonate with our target audience.\n\nReturn both scripts clearly labeled and ready to be filmed.",
+        "options": {
+          "systemMessage": "=You are a senior scriptwriter specializing in high-performing short-form video ads for Facebook and Instagram. You rewrite existing video ad scripts (VSL or UGC-style) to align with a new brand and product — while preserving the structure, flow, and pacing of the original.\n\nYour goals:\n- Make the script attention-grabbing from the first 3 seconds.\n- Rewrite the content to reflect a different brand’s tone, audience, and product.\n- Maintain a natural, unscripted tone suitable for Facebook/Instagram Reels and feed ads.\n- Make the script sound like a real person (e.g. customer, influencer, founder).\n\nEvery output should feel native to Facebook/Instagram, emotionally engaging, and optimized for conversions.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1260,
+        520
+      ],
+      "id": "cb135b85-2ac5-468a-8385-408ea3d21285",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.ad_id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        380,
+        80
+      ],
+      "id": "5fbb6491-a2b4-49e2-9e98-e0a4eb0ef2b1",
+      "name": "Get Video"
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n compatible version - processes input items and returns properly formatted output\nfunction processData(items) {\n  // Create a new array to hold the processed items\n  return items.map(item => {\n    const htmlData = item.json.data || item.json.html || JSON.stringify(item.json);\n    \n    try {\n      // Find the start of the JSON data\n      const jsonStartIndex = htmlData.indexOf('\"archiveTypes\"');\n      if (jsonStartIndex === -1) {\n        // Return the original item with an error message\n        return {\n          json: {\n            ...item.json,\n            sdVideoUrl: null,\n            error: \"Could not find video data\"\n          }\n        };\n      }\n      \n      // Create a valid JSON string by adding braces around it\n      const jsonString = '{' + htmlData.substring(jsonStartIndex);\n      \n      // Find the videos array\n      const videosStartIndex = jsonString.indexOf('\"videos\":[');\n      if (videosStartIndex === -1) {\n        return {\n          json: {\n            ...item.json,\n            sdVideoUrl: null,\n            error: \"No videos array found\"\n          }\n        };\n      }\n      \n      // Extract the SD video URL using regex\n      const sdUrlRegex = /\"video_sd_url\":\"([^\"]+)\"/;\n      const match = jsonString.match(sdUrlRegex);\n      \n      if (match && match[1]) {\n        // Unescape the URL\n        const sdVideoUrl = match[1].replace(/\\\\\\//g, '/');\n        \n        // Return the original item plus the extracted URL\n        return {\n          json: {\n            ...item.json,\n            sdVideoUrl: sdVideoUrl\n          }\n        };\n      } else {\n        return {\n          json: {\n            ...item.json,\n            sdVideoUrl: null,\n            error: \"SD video URL not found\"\n          }\n        };\n      }\n    } catch (error) {\n      // Return the original item with the error\n      return {\n        json: {\n          ...item.json,\n          sdVideoUrl: null,\n          error: error.message\n        }\n      };\n    }\n  });\n}\n\n// This is what n8n expects\nreturn processData($input.all());"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        80
+      ],
+      "id": "4669fc7b-54cd-4faf-9f93-c708e9155ebd",
+      "name": "Parse Video URL"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sync.api.cloudconvert.com/v2/jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer [Your API Key Here]"
+            },
+            {
+              "name": "Content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"tasks\": {\n    \"import-my-file\": {\n      \"operation\": \"import/url\",\n      \"url\": \"{{ $json.sdVideoUrl }}\"\n    },\n    \"convert-my-file\": {\n      \"operation\": \"convert\",\n      \"input\": \"import-my-file\",\n      \"input_format\": \"mp4\",\n      \"output_format\": \"mp3\"\n    },\n    \"export-my-file\": {\n      \"operation\": \"export/url\",\n      \"input\": \"convert-my-file\"\n    }\n  },\n  \"redirect\": true\n} ",
+        "options": {}
+      },
+      "id": "f24283b8-67eb-4a0e-96e6-4e6e16747df5",
+      "name": "Convert to MP3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        820,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "2c8c1589-2de2-41f0-bfbc-81fa782bc3e1",
+      "name": "Transcribe Recording",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        1040,
+        80
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "oh0Z4G6r5neaRiER",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/shu8hvrXbJbY3Eb9W/run-sync-get-dataset-items?token=[Your API Key Here]",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"addParentData\": false,\n  \"directUrls\": [\n    \"{{ $json['Instagram URL'] }}\"\n  ],\n  \"enhanceUserSearchWithFacebookPage\": false,\n  \"isUserReelFeedURL\": false,\n  \"isUserTaggedFeedURL\": false,\n  \"resultsType\": \"details\",\n  \"searchLimit\": 1,\n  \"searchType\": \"hashtag\"\n}",
+        "options": {}
+      },
+      "id": "922b24a2-8c51-489d-abb6-b610713d085b",
+      "name": "Get Video File Apify",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        120,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://sync.api.cloudconvert.com/v2/jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer [Your API Key Here]"
+            },
+            {
+              "name": "Content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"tasks\": {\n    \"import-my-file\": {\n      \"operation\": \"import/url\",\n      \"url\": \"{{ $json.videoUrl }}\"\n    },\n    \"convert-my-file\": {\n      \"operation\": \"convert\",\n      \"input\": \"import-my-file\",\n      \"input_format\": \"mp4\",\n      \"output_format\": \"mp3\"\n    },\n    \"export-my-file\": {\n      \"operation\": \"export/url\",\n      \"input\": \"convert-my-file\"\n    }\n  },\n  \"redirect\": true\n} ",
+        "options": {}
+      },
+      "id": "b5160380-7a9e-42bf-b53e-81348ee24ff8",
+      "name": "Mp4 to Mp3 Cloud Convert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "dae7ca6e-de6a-4561-a00b-3abacf43f792",
+      "name": "Transcribe",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.5,
+      "position": [
+        740,
+        520
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "oh0Z4G6r5neaRiER",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-3-7-sonnet-20250219",
+          "cachedResultName": "Claude 3.7 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1260,
+        220
+      ],
+      "id": "8a5a5142-52be-446c-8e10-3f5a63eca5ee",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "caeURtm3tne7cj3i",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cdc3b5cb-2a15-4a10-97aa-5928fdbf0d73",
+              "name": "UGC Script",
+              "value": "={{ $json.UGCScript }}",
+              "type": "string"
+            },
+            {
+              "id": "df90fbc5-87ea-438f-981f-c579d81aad1d",
+              "name": "VSL Script",
+              "value": "={{ $json.VSLScript }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1840,
+        80
+      ],
+      "id": "921eecc5-0e66-4af0-bd8f-f6a0c250a947",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1lHLoibAdwH-SnRIgiFsGvdRiWe8jQob20tkL0J9gp7I",
+          "mode": "list",
+          "cachedResultName": "n8n - UGC Writer",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lHLoibAdwH-SnRIgiFsGvdRiWe8jQob20tkL0J9gp7I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lHLoibAdwH-SnRIgiFsGvdRiWe8jQob20tkL0J9gp7I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Original Script": "={{ $('Transcribe Recording').item.json.text }}",
+            "VSL Script": "={{ $json['VSL Script'] }}",
+            "UGC Script": "={{ $json['UGC Script'] }}"
+          },
+          "matchingColumns": [
+            "Original Script"
+          ],
+          "schema": [
+            {
+              "id": "Original Script",
+              "displayName": "Original Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UGC Script",
+              "displayName": "UGC Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "VSL Script",
+              "displayName": "VSL Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2060,
+        80
+      ],
+      "id": "2aeba7ad-b659-46d9-aebc-2173564871da",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J7Jb3qY6SUr2btZB",
+          "name": "Riverstreet Media Gsheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-3-7-sonnet-20250219",
+          "cachedResultName": "Claude 3.7 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1260,
+        680
+      ],
+      "id": "74538047-c856-49e8-beee-67392a7899e4",
+      "name": "Anthropic Chat Model1",
+      "credentials": {
+        "anthropicApi": {
+          "id": "caeURtm3tne7cj3i",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1lHLoibAdwH-SnRIgiFsGvdRiWe8jQob20tkL0J9gp7I",
+          "mode": "list",
+          "cachedResultName": "n8n - UGC Writer",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lHLoibAdwH-SnRIgiFsGvdRiWe8jQob20tkL0J9gp7I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1lHLoibAdwH-SnRIgiFsGvdRiWe8jQob20tkL0J9gp7I/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Original Script": "={{ $('Transcribe Recording').item.json.text }}",
+            "VSL Script": "={{ $json['VSL Script'] }}",
+            "UGC Script": "={{ $json['UGC Script'] }}"
+          },
+          "matchingColumns": [
+            "Original Script"
+          ],
+          "schema": [
+            {
+              "id": "Original Script",
+              "displayName": "Original Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UGC Script",
+              "displayName": "UGC Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "VSL Script",
+              "displayName": "VSL Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2060,
+        520
+      ],
+      "id": "9e6e916d-5940-416d-8d89-12d4438575e3",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J7Jb3qY6SUr2btZB",
+          "name": "Riverstreet Media Gsheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Scrape + Transcribe Facebook Ad\n",
+        "height": 400,
+        "width": 840,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        -60
+      ],
+      "id": "ea5ea14f-4e1a-48d5-815c-6a51b593c889",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Scrape + Transcribe IG Reel\n",
+        "height": 400,
+        "width": 840,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        340,
+        400
+      ],
+      "id": "f8606e9d-b145-49ae-9269-f39e76866fa9",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Generate New Scripts\n",
+        "height": 400,
+        "width": 360,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        -60
+      ],
+      "id": "c64a22f5-f347-4c12-bfd0-fbe0ea31320b",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Generate New Scripts\n",
+        "height": 400,
+        "width": 360,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        400
+      ],
+      "id": "a6d90a5a-f365-4768-aac0-eb4c26084d7d",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Prepare + Upload To Google Sheets\n",
+        "height": 400,
+        "width": 660,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        -60
+      ],
+      "id": "cc548ea0-1b0a-41d5-8663-bf66e9243f9c",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## Prepare + Upload To Google Sheets\n",
+        "height": 400,
+        "width": 660,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        400
+      ],
+      "id": "77ea04ab-5917-47e9-aba5-2e6f729a1251",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "instructions": "I want to split the scripts from the output from the AI agent node into individual outputs. So one output for the UGC script and one output for the VSL script",
+        "codeGeneratedForPrompt": "I want to split the scripts from the output from the AI agent node into individual outputs. So one output for the UGC script and one output for the VSL script",
+        "jsCode": "const items = $input.all();\nconst scripts = items.map((item) => {\n  const output = item?.json?.output;\n  const splitScripts = output.split(\"\\n\\n## \");\n  const UGCScript = splitScripts[1];\n  const VSLScript = splitScripts[2];\n  return { UGCScript, VSLScript };\n});\nreturn scripts;\n"
+      },
+      "type": "n8n-nodes-base.aiTransform",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        80
+      ],
+      "id": "aca3f643-7168-4c92-8a90-15713182cc4f",
+      "name": "AI Transform"
+    },
+    {
+      "parameters": {
+        "instructions": "I want to split the scripts from the output from the AI agent node into individual outputs. So one output for the UGC script and one output for the VSL script",
+        "codeGeneratedForPrompt": "I want to split the scripts from the output from the AI agent node into individual outputs. So one output for the UGC script and one output for the VSL script",
+        "jsCode": "const items = $input.all();\nconst scripts = items.map((item) => {\n  const output = item?.json?.output;\n  const splitScripts = output.split(\"\\n\\n## \");\n  const UGCScript = splitScripts[1];\n  const VSLScript = splitScripts[2];\n  return { UGCScript, VSLScript };\n});\nreturn scripts;\n"
+      },
+      "type": "n8n-nodes-base.aiTransform",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        520
+      ],
+      "id": "84fc569a-0fdf-4f47-aee8-4d5aa404136e",
+      "name": "AI Transform1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cdc3b5cb-2a15-4a10-97aa-5928fdbf0d73",
+              "name": "UGC Script",
+              "value": "={{ $json.UGCScript }}",
+              "type": "string"
+            },
+            {
+              "id": "df90fbc5-87ea-438f-981f-c579d81aad1d",
+              "name": "VSL Script",
+              "value": "={{ $json.VSLScript }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1860,
+        520
+      ],
+      "id": "9a16ceca-69a0-4380-a41c-aec6e5c502c9",
+      "name": "Edit Fields2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Get Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Video File Apify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Transform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "AI Transform1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video": {
+      "main": [
+        [
+          {
+            "node": "Parse Video URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Video URL": {
+      "main": [
+        [
+          {
+            "node": "Convert to MP3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to MP3": {
+      "main": [
+        [
+          {
+            "node": "Transcribe Recording",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe Recording": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Video File Apify": {
+      "main": [
+        [
+          {
+            "node": "Mp4 to Mp3 Cloud Convert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mp4 to Mp3 Cloud Convert": {
+      "main": [
+        [
+          {
+            "node": "Transcribe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Transform": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Transform1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8c2916cf-c797-4aa2-af29-2296b8f7bc6d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e0f3afdfa8cdf759f3628c3983ef08ff7c153a90839a4c34ddd866854a12653a"
+  },
+  "id": "qYqRTEyWVxXBz7lV",
+  "tags": []
+}

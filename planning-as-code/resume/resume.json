@@ -1,0 +1,60 @@
+{
+  "projectKickoff": {
+    "title": "PROJECT KICK-OFF CHECKLIST & AUTOMATION HUB",
+    "description": "This document is the final gateway between planning and development. Ensure all steps are completed before running any automation scripts or writing code."
+  },
+  "projectStatus": {
+    "currentPhase": "[ Planning | Ready for Development | In Progress ]",
+    "lastUpdated": "[ YYYY-MM-DD ]"
+  },
+  "planningValidationChecklist": {
+    "phase1_productVision": {
+      "title": "Phase 1: Product Vision & Scope (product-overview.md)",
+      "checks": [
+        { "item": "Project Overview: High-level goals are clearly defined.", "completed": false },
+        { "item": "User Stories: Core Epics and User Stories are written from the user's perspective.", "completed": false },
+        { "item": "Acceptance Criteria: Every User Story has clear, testable `Given/When/Then` criteria.", "completed": false },
+        { "item": "Roadmap: The Release Plan is defined and prioritized.", "completed": false },
+        { "item": "Stakeholder Approval: The client/stakeholder has reviewed and approved the product-overview.md.", "completed": false }
+      ]
+    },
+    "phase2_technicalBlueprint": {
+      "title": "Phase 2: Technical Blueprint (plan.md)",
+      "checks": [
+        { "item": "Tech Stack: Main technologies are decided and documented.", "completed": false },
+        { "item": "Data Model: The Mermaid ER Diagram is complete and accurately reflects the data structure.", "completed": false },
+        { "item": "API Endpoints: Key API endpoints are defined with methods, paths, and expected bodies.", "completed": false },
+        { "item": "Architectural Decisions: All major architectural decisions have been documented in their respective ADRs in the /docs/adr folder.", "completed": false }
+      ]
+    }
+  },
+  "automationHub": {
+    "title": "Automation Hub (Ready for Machine Programming)",
+    "description": "Once all checkboxes above are marked as complete, you are ready to execute the following automated tasks.",
+    "tasks": [
+      {
+        "name": "Generate Project Scaffold",
+        "command": "npm run generate:scaffold",
+        "action": "Reads plan.json to create the initial directory structure, model files, and API route definitions.",
+        "completed": false
+      },
+      {
+        "name": "Generate Tests Skeleton",
+        "command": "npm run generate:tests",
+        "action": "Reads product-overview.json to create placeholder test files for each User Story and Acceptance Criteria.",
+        "completed": false
+      },
+      {
+        "name": "Populate Project Management Tool",
+        "command": "npm run generate:tasks",
+        "action": "Reads product-overview.json to create Epics, Stories, and tasks in your designated tool (e.g., Jira, Trello, GitHub Issues).",
+        "completed": false
+      }
+    ]
+  },
+  "finalApproval": {
+    "statement": "I, the operator, confirm that all planning phases are complete and the project is ready for development to begin.",
+    "signedOffBy": "[ Your Name ]",
+    "approved": false
+  }
+}

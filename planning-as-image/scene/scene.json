@@ -1,0 +1,141 @@
+{
+  "scene": {
+    "location": "outdoor setting with trees",
+    "setting_type": "indoor/sunlit room",
+    "spatial_depth": "deep (dark background)",
+
+    "background": {
+      "elements": [
+        "green foliage",
+        "soft warm daylight",
+        "strong bokeh blur, creamy circles"
+      ],
+      "treatment": "shadowed/dark to contrast with sunlit subject",
+      "objects_catalog": "Mary Kay Satin Hands lotion tube, white button-down shirt",
+
+      "elements_detailed": [
+        {
+          "item": "Shadowed Room",
+          "position": "background",
+          "distance": "background",
+          "size": "dominant",
+          "condition": "n/a",
+          "specific_features": "dark/indistinct"
+        },
+        {
+          "item": "Fabric/Pillow edge",
+          "position": "bottom right",
+          "distance": "foreground/midground",
+          "size": "small",
+          "condition": "n/a",
+          "specific_features": "hint of pink/purple pattern"
+        }
+      ],
+
+      "wall_surface": {
+        "material": "not clearly visible",
+        "surface_treatment": "n/a",
+        "texture": "n/a",
+        "finish": "n/a",
+        "color": "dark/black shadow",
+        "color_variation": "n/a",
+        "features": "n/a",
+        "wear_indicators": "n/a"
+      },
+
+      "floor_surface": {
+        "material": "not visible",
+        "color": "n/a",
+        "pattern": "n/a"
+      }
+    },
+
+    "atmosphere": [
+      "thin smoke wisps rising from the cigarette",
+      "subtle heat shimmer near the flame (very light)"
+    ],
+
+    "lighting": {
+      "type": "natural outdoor light",
+      "direction": "soft side light from upper-left",
+      "contrast": "medium",
+      "highlights": "natural highlights on nose bridge and lips, not glossy-plastic",
+      "shadows": "soft shadows under nose and jaw, realistic falloff"
+    }
+  },
+
+  "subject_analysis": {
+    "primary_subject": "Young female adult",
+    "positioning": "center",
+    "scale": "medium shot (waist up)",
+    "interaction": "dispensing product onto hand",
+
+    "facial_expression": {
+      "mouth": "closed/slight smile",
+      "smile_intensity": "subtle/peaceful",
+      "eyes": "looking down/closed or lowered gaze",
+      "eyebrows": "relaxed/natural",
+      "overall_emotion": "calm/enjoying the moment",
+      "authenticity": "staged candid"
+    },
+
+    "hair": {
+      "length": "shoulder-length/lob",
+      "cut": "layered lob",
+      "texture": "wavy/blown out",
+      "texture_quality": "soft/thick",
+      "natural_imperfections": "loose strands backlit by sun",
+      "styling": "loose waves/blowout",
+      "styling_detail": "Hair is highlighted blonde (balayage) with darker roots, styled in soft loose waves catching the sunlight",
+      "part": "center/slightly off-center",
+      "volume": "moderate/bouncy",
+      "details": "Sunlight creates a halo effect on the blonde strands"
+    },
+
+    "hands_and_gestures": {
+      "left_hand": "palm open facing up",
+      "right_hand": "holding product tube upside down",
+      "finger_positions": "Right hand: squeezing tube with thumb and fingers; Left hand: cupped gently to receive lotion",
+      "finger_interlacing": "n/a",
+      "hand_tension": "relaxed",
+      "interaction": "squeezing cream onto palm",
+      "naturalness": "functional gesture",
+      "details": "Nails are long, almond-shaped with nude polish and abstract black line art"
+    },
+
+    "body_positioning": {
+      "posture": "sitting/relaxed",
+      "angle": "facing forward/slightly angled right",
+      "weight_distribution": "relaxed back",
+      "shoulders": "relaxed"
+    }
+  },
+
+  "composition": {
+    "shot_type": "medium portrait (chest to head)",
+    "framing": "subject centered, hands visible in lower foreground",
+    "camera_angle": "slightly above eye level, mild downward tilt",
+    "depth_of_field": "shallow, subject tack sharp, background strongly blurred"
+  },
+
+  "generation_parameters": {
+    "prompts": [
+      "Sun-drenched lifestyle portrait of a blonde woman with balayage hair wearing a loose white button-down shirt, applying hand cream from a sage green tube onto her palm, long manicured nails with abstract art, hard direct sunlight creating high contrast shadows on shirt and face, golden hour lighting, dark background, peaceful expression looking down",
+      "Golden hour beauty shot, woman dispensing lotion, Mary Kay Satin Hands tube, white shirt, strong sun rays, hard shadows, warm color temperature, candid moment, aesthetic nail art"
+    ],
+    "keywords": [
+      "sun-kissed",
+      "hand cream application",
+      "Satin Hands",
+      "white button-down",
+      "balayage hair",
+      "nail art",
+      "hard sunlight",
+      "high contrast",
+      "golden hour",
+      "lifestyle photography"
+    ],
+    "technical_settings": "Smartphone camera or DSLR, f/4.0 aperture, low ISO, fast shutter speed to handle bright sun",
+    "post_processing": "Warmth enhancement, contrast boost, shadow deepening"
+  }
+}

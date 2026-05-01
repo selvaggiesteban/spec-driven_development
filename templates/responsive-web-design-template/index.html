@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Responsive web design template</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Responsive web design template made by @selvaggiesteban"
+    />
+    <meta name="author" content="Esteban Selvaggi" />
+    <meta name="theme-color" content="#111" />
+    <link rel="shortcut icon" href="assets/images/logo.png" />
+    <meta property="og:image" content="..." />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <!-- Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+    <!-- Normalize -->
+    <link type="text/css" rel="stylesheet" href="assets/css/normalize.css" />
+    <!-- Bootstrap -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- Fancybox -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"
+    />
+    <!-- Slick -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"
+    />
+    <!-- Fontawesome kit -->
+    <script
+      src="https://kit.fontawesome.com/91eae8b0c2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Responsive navigation menu -->
+    <nav class="nav-top">
+      <ul class="nav-contact">
+        <li>
+          <i class="fa-solid fa-phone-volume"></i>&nbsp;&nbsp;(+54) 11 5332-3937
+        </li>
+        <li>
+          <i class="fa-solid fa-envelope"></i
+            >&nbsp;&nbsp;hello@selvaggiesteban.dev</a
+          >
+        </li>
+      </ul>
+      <ul class="nav-social">
+        <li class="social">
+          <a
+            href="#"
+          >
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="social">
+          <a href="#">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </li>
+        <li class="social">
+          <a href="#">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </li>
+        <li class="social">
+          <a href="#">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+        </li>
+        <li class="social">
+          <a href="#">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+        </li>
+        <li class="social">
+          <a href="#">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="lang">
+        <li>
+          <a href="#"><img src="assets/images/es.png" />Es</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="nav-menu">
+      <img
+        class="nav-brand"
+        src="assets/images/logo.png"
+        alt="Esteban Selvaggi"
+      />
+      <input type="checkbox" id="nav" class="hidden" />
+      <label for="nav" class="nav-btn">
+        <i></i>
+        <i></i>
+        <i></i>
+      </label>
+      <div class="nav-wrapper">
+        <ul class="menu">
+          <li><a href="#">Menu item</a></li>
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              Menu item
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Menu item</a></li>
+              <li><a class="dropdown-item" href="#">Menu item</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Menu item</a></li>
+          <li><a href="#">Menu item</a></li>
+          <li><a href="#">Menu item</a></li>
+          <li><a href="#">Menu item</a></li>
+        </ul>
+        <a href="#" class="cta-navbar">Call to action</a>
+      </div>
+    </nav>
+    <!-- Header with form -->
+    <section id="header">
+      <div class="container-fluid">
+        <div class="row no-gutters">
+          <div class="col-lg-6 col-xs-12">
+            <h1>Header title</h1>
+            <h2>Caption might be placed here</h2>
+          </div>
+          <div class="col-lg-6 col-xs-12 form-container-1">
+            <h2>Call to action title</h2>
+            <form action="assets/webmail.php" method="post" enctype="multipart/form-data">
+              <input type="text" name="name" required class="field" placeholder="First name">
+              <input type="text" name="tel" required class="field" placeholder="Phone number">
+              <div class="radio-inputs">
+                <input type="radio" name="category"><label for="company">Company</label>
+                <input type="radio" name="category"><label for="professional">Professional</label>
+              </div>
+              <input type="text" name="email" required class="field" placeholder="E-mail">
+              <input type="submit" value="Submit" class="cta-primary">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <h1>Services section</h1>
+        <h2>Caption might be placed here</h2>
+        <div class="row no row-cols-1 row-cols-lg-3">
+          <div class="col">
+            <div class="service service-1"></div>
+            <div class="description">
+              <h1>Service title</h1>
+              <p>Caption might be placed here</p>
+              <a href="#"><button class="cta-secundary" type="button">Open link <i class="far fa-arrow-alt-circle-right"></i></button></a>
+            </div>
+          </div>
+          <div class="col">
+            <div class="service service-2"></div>
+            <div class="description">
+              <h1>Service title</h1>
+              <p>Caption might be placed here</p>
+              <a href="#"><button class="cta-secundary" type="button">Open link <i class="far fa-arrow-alt-circle-right"></i></button></a>
+            </div>
+          </div>
+          <div class="col">
+            <div class="service service-3"></div>
+            <div class="description">
+              <h1>Service title</h1>
+              <p>Caption might be placed here</p>
+              <a href="#"><button class="cta-secundary" type="button">Open link <i class="far fa-arrow-alt-circle-right"></i></button></a>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-lg-3">
+          <div class="col">
+            <div class="service service-4"></div>
+            <div class="description">
+              <h1>Service title</h1>
+              <p>Caption might be placed here</p>
+              <a href="#"><button class="cta-secundary" type="button">Open link <i class="far fa-arrow-alt-circle-right"></i></button></a>
+            </div>
+          </div>
+          <div class="col">
+            <div class="service service-5"></div>
+            <div class="description">
+              <h1>Service title</h1>
+              <p>Caption might be placed here</p>
+              <a href="#"><button class="cta-secundary" type="button">Open link <i class="far fa-arrow-alt-circle-right"></i></button></a>
+            </div>
+          </div>
+          <div class="col">
+            <div class="service service-6"></div>
+            <div class="description">
+              <h1>Service title</h1>
+              <p>Caption might be placed here</p>
+              <a href="#"><button class="cta-secundary" type="button">Open link <i class="far fa-arrow-alt-circle-right"></i></button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Carousel example with captions -->
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-controls">
+        <ol class="carousel-indicators">
+          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" style="background-image:url('assets/images/slide-1.jpg');"></li>
+          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" style="background-image:url('assets/images/slide-2.jpg');"></li>
+          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" style="background-image:url('assets/images/slide-3.jpg');"></li>
+        </ol>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image:url('assets/images/slide-1.jpg')">
+          <div class="container">
+            <h2>Caption might be placed here</h2>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image:url('assets/images/slide-2.jpg')">
+          <div class="container">
+            <h2>Caption might be placed here</h2>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image:url('assets/images/slide-3.jpg')">
+          <div class="container">
+            <h2>Caption might be placed here</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Responsive stage-gate process diagram -->
+    <section id="stages">
+      <div class="container">
+        <h1>Stage-gate process diagram</h1>
+        <h2>Caption might be placed here</h2>
+        <div class="flex-stage-wrapper">
+          <input class="radio" type="radio" name="card" id="card-1" checked />
+          <label class="content" for="card-1">
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 1 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <input class="radio" type="radio" name="card" id="card-2" />
+          <label class="content" for="card-2">
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 2 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <input class="radio" type="radio" name="card" id="card-3" />
+          <label class="content" for="card-3">
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 3 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <input class="radio" type="radio" name="card" id="card-4" />
+          <label class="content" for="card-4">
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 4 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <input class="radio" type="radio" name="card" id="card-5" />
+          <label class="content" for="card-5">
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 5 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+        </div>
+      </div>
+    </section>
+    <section id="stages-mobile">
+      <div class="container">
+        <h1>Stage-gate process diagram</h1>
+        <h2>
+          Caption might be placed here
+        </h2>
+        <div class="stage-slider">
+          <label>
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 1 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <label>
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 2 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <label>
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 3 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <label>
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 4 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+          <label>
+            <span class="icon"
+              ><img
+                src="assets/images/right-arrow.png"
+            /></span>
+            <h3 class="stage-title">
+              Stage 5 title
+              <span class="stage-subtitle"
+                >Caption might be placed here</span
+              >
+            </h3>
+          </label>
+        </div>
+      </div>
+    </section>
+    <!-- Banner -->
+    <section id="banner">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-lg-6 col-xs-12">
+            <h1>Section title</h1>
+            <p>Caption might be placed here</p>
+            <button class="cta-secundary" type="button">Open link<i class="far fa-arrow-alt-circle-right"></i></button>
+          </div>
+          <div class="col-lg-6 col-xs-12">
+            <h1>Section title</h1>
+            <p>Caption might be placed here</p>
+            <button class="cta-secundary" type="button">Open link<i class="far fa-arrow-alt-circle-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Customers -->
+    <section id="customers">
+      <div class="container">
+        <div class="row no-gutters">
+          <h1>Highlights & customers success stories</h1>
+          <h2>Caption might be placed here</h2>
+        </div>
+        <!-- Gallery -->
+        <section id="gallery">
+          <div class="row no-gutters">
+            <div class="showcase col-6 col-md-3">
+              <a
+                href="assets/images/showcase.png"
+                class="fancybox"
+                data-fancybox="gallery-1"
+                data-caption="You can add some descriptive text too."
+              >
+                <img
+                  src="assets/images/showcase.png"
+                  width="100%"
+                  height="100%"
+                />
+              </a>
+            </div>
+            <div class="showcase col-6 col-md-3">
+              <a
+                href="assets/images/showcase.png"
+                class="fancybox"
+                data-fancybox="gallery-1"
+                data-caption="You can add some descriptive text too."
+              >
+                <img
+                  src="assets/images/showcase.png"
+                  width="100%"
+                  height="100%"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="showcase col-6 col-md-3">
+              <a
+                href="assets/images/showcase.png"
+                class="fancybox"
+                data-fancybox="gallery-1"
+                data-caption="You can add some descriptive text too."
+              >
+                <img
+                  src="assets/images/showcase.png"
+                  width="100%"
+                  height="100%"
+                />
+              </a>
+            </div>
+            <div class="showcase col-6 col-md-3">
+              <a
+                href="assets/images/showcase.png"
+                class="fancybox"
+                data-fancybox="gallery-1"
+                data-caption="You can add some descriptive text too."
+              >
+                <img
+                  src="assets/images/showcase.png"
+                  width="100%"
+                  height="100%"
+                />
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- Features -->
+        <section id="features">
+          <div class="row no-gutters">
+            <div class="col-lg-6 col-xs-12">
+              <div class="item-icon"><i class="fa-regular fa-star fa-3x"></i></div>
+                <h1>Feature title</h1>
+                <h2>Caption might be placed here</h2>
+                <p>You can add some descriptive text too.</p>
+            </div>
+            <div class="col-lg-6 col-xs-12">
+              <h1>Feature title</h1>
+              <h2>Caption might be placed here</h2>
+              <p>You can add some descriptive text too.</p>
+            </div>
+          </div>
+        </section>
+        <!-- Responsive multiple items -->
+        <div class="responsive-multiple-items">
+          <img src="assets/images/amazon.png" />
+          <img src="assets/images/facebook.png" />
+          <img src="assets/images/google.png" />
+          <img src="assets/images/instagram.png" />
+          <img src="assets/images/microsoft.png" />
+          <img src="assets/images/netflix.png" />
+        </div>
+      </div>
+    </section>
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2">
+          <div class="col faq">
+            <h2>FAQ Section</h2>
+            <a href="https://wa.me/+5491153323937"
+              >¿Another question?&nbsp;<i class="far fa-arrow-alt-circle-right"></i>&nbsp;(+54) 11 5332-3937</a
+            >
+          </div>
+          <div class="col">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingOne">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Question statement
+                  </button>
+                </h3>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    Informative content might be placed here
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="true"
+                    aria-controls="collapseTwo"
+                  >
+                  Question statement
+                  </button>
+                </h3>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    Informative content might be placed here
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingThree">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                  Question statement
+                  </button>
+                </h3>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    Informative content might be placed here
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingFourth">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFourth"
+                    aria-expanded="true"
+                    aria-controls="collapseFourth"
+                  >
+                  Question statement
+                  </button>
+                </h3>
+                <div
+                  id="collapseFourth"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingFourth"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    Informative content might be placed here
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header" id="headingSeventh">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseSeventh"
+                    aria-expanded="true"
+                    aria-controls="collapseSeventh"
+                  >
+                  Question statement
+                  </button>
+                </h3>
+                <div
+                  id="collapseSeventh"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingSeventh"
+                  data-bs-parent="#accordionExample"
+                >
+                  <div class="accordion-body">
+                    Informative content might be placed here
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer-section">
+      <div class="footer-cta">
+        <div class="container">
+          <h1>Want to reach us?</h1>
+          <div class="row row-cols-1 row-cols-lg-3">
+            <div class="col">
+              <div class="single-cta">
+                <i class="fas fa-map-marker-alt fa-2x"></i>
+                <div class="cta-text">
+                  <p>
+                    Buenos Aires, Argentina
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="single-cta">
+                <i class="fas fa-phone fa-2x"></i>
+                <div class="cta-text">
+                  <p>(+54) 11 5332 3937</p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="single-cta">
+                <i class="fas fa-envelope fa-2x"></i>
+                <div class="cta-text">
+                  <p>hello@selvaggiesteban.dev</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13136.066850016401!2d-58.3815704!3d-34.6037389!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x11bead4e234e558b!2sObelisco!5e0!3m2!1ses-419!2sar!4v1662038169893!5m2!1ses-419!2sar" width="100%" height="600px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="footer-content">
+        <div class="row row-cols-1 row-cols-lg-4">
+          <div class="col">
+            <div class="footer-widget">
+              <div class="footer-logo">
+                <a href="index.html"
+                  ><img src="assets/images/isotipo.svg" alt="@selvaggiesteban"
+                /></a>
+              </div>
+              <div class="footer-text">
+                <p>
+                  Entity definition or meaning might be placed here
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="footer-widget">
+              <div class="footer-widget-heading">
+                <h3>Navigation menu</h3>
+              </div>
+              <ul class="footer-menu">
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="footer-widget">
+              <div class="footer-widget-heading">
+                <h3>Navigation menu</h3>
+              </div>
+              <ul class="footer-menu">
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+                <li><a href="#">Menu link</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="footer-widget">
+              <div class="footer-widget-heading">
+                <h3>Social widgets</h3>
+              </div>
+              <ul class="social">
+                <li>
+                  <a
+                    href="#"
+                  >
+                    <i class="fa-brands fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa-brands fa-github"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa-brands fa-instagram"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa-brands fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="fa-brands fa-youtube"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col">
+              <div class="copyright-text">
+                Esteban Selvaggi © 2022
+              </div>
+            </div>
+            <div class="col">
+              <div class="copyright-area-menu">
+                <ul>
+                  <li>
+                    <a href="#">Menu link</a>
+                  </li>
+                  <li>
+                    <a href="#">Menu link</a>
+                  </li>
+                  <li>
+                    <a href="#">Menu link</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Responsive navigation menu behavior -->
+    <script src="assets/js/nav.js"></script>
+    <!-- Floating WhatsApp button -->
+    <script src="assets/js/floatingwhatsapp.js"></script>
+    <script src="assets/js/wabutton.js"></script>
+    <div id="WAButton"></div>
+    <!-- Fancybox -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    <!-- Slick -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+    ></script>
+    <!-- Slick stage slider -->
+    <script type="text/javascript">
+      $(".stage-slider").slick({
+        autoplay: true,
+        autoplaySpeed: 2500,
+        arrows: false,
+        dots: true,
+        draggable: true,
+        fade: false,
+        focusOnSelect: false,
+        edgeFriction: 0.15,
+        infinite: true,
+        initialSlide: 0,
+        lazyLoad: "ondemand",
+        mobileFirst: true,
+        pauseOnFocus: true,
+        pauseOnHover: true,
+        pauseOnDotsHover: false,
+        respondTo: "slider",
+        speed: 300,
+        swipe: true,
+        swipeToSlide: false,
+        touchMove: true,
+        vertical: false,
+        verticalSwiping: false,
+      });
+    </script>
+  <!-- Slick responsive multiple items -->
+  <script type="text/javascript">
+    $(".responsive-multiple-items").slick({
+      autoplay: true,
+      autoplaySpeed: 3500,
+      arrows: false,
+      infinite: true,
+      pauseOnFocus: false,
+      pauseOnHover: false,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 576,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    });
+  </script>
+  <!-- Back to top button -->
+  <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-up"></i></button>
+  <script>
+    // Get the button:
+    mybutton = document.getElementById("myBtn");
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+  </script>
+  </body>
+</html>

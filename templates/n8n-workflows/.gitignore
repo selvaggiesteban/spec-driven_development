@@ -1,0 +1,10 @@
+# n8n
+.n8n/
+node_modules/
+
+# Environment
+.env
+
+# System
+.DS_Store
+Thumbs.db

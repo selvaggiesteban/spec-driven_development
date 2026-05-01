@@ -1,0 +1,489 @@
+{
+  "name": "TikTok Marketing Insights - Shared",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/clockworks~tiktok-scraper/run-sync-get-dataset-items?token=YOURTOKENHERE",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"excludePinnedPosts\": false,\n    \"proxyCountryCode\": \"None\",\n    \"resultsPerPage\": {{ $json['How Many Videos'] }},\n    \"searchQueries\": [\n        \"{{ $json['Keyword To Scrape '] }}\"\n    ],\n    \"shouldDownloadAvatars\": false,\n    \"shouldDownloadCovers\": false,\n    \"shouldDownloadMusicCovers\": false,\n    \"shouldDownloadSlideshowImages\": false,\n    \"shouldDownloadSubtitles\": false,\n    \"shouldDownloadVideos\": false\n}\n\n\n\n\n\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        360,
+        0
+      ],
+      "id": "44a247e7-33cd-4b4e-bb8b-1a4943f205fb",
+      "name": "Scrape TikTok (Apify)"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is a TikTok transcript. Analyze it for the following:\n\n1. Determine whether the speaker is describing a **problem**, a **solution**, or **both** regarding the keyword: \"{{ $('On form submission').item.json['Keyword To Scrape '] }}\".\n2. Extract:\n   - Pain points\n   - Desired outcomes\n   - Triggers or motivating events\n   - Interesting direct quotes or phrases\n\nTranscript: {{ $json.transcript }}\n",
+        "options": {
+          "systemMessage": "You are a customer research analyst. Your job is to extract actionable marketing insights from user-generated content like TikTok transcripts.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1300,
+        -200
+      ],
+      "id": "23d019cc-c757-4f79-ad2e-31a3cee46369",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1300,
+        -20
+      ],
+      "id": "b1173569-d86d-48cd-9dd6-31bb900e7f34",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "oh0Z4G6r5neaRiER",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "TikTok Scraper ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Keyword To Scrape "
+            },
+            {
+              "fieldLabel": "How Many Videos",
+              "placeholder": "20"
+            },
+            {
+              "fieldLabel": "Your Product Description"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        140,
+        0
+      ],
+      "id": "abfbf768-ce50-4460-8471-6a16952af350",
+      "name": "On form submission",
+      "webhookId": "8f2a292d-01ab-45ec-9197-9f053276c70c"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const vtt = $json.body;                // text we just downloaded\n\nif (!vtt) {\n  return { transcript: null, note: \"no TikTok captions\" };\n}\n\nconst lines = vtt\n  .split(/\\r?\\n/)\n  .filter(l => l && !l.match(/^(\\d+|WEBVTT|X-TIMESTAMP|[:\\d+.\\-> ]+$)/));\n\nreturn { transcript: lines.join(\" \") };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        0
+      ],
+      "id": "411147f3-43f9-421f-ba93-4f43954225f9",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "url": "={{$json[\"videoMeta\"][\"subtitleLinks\"].find(l => l.source === \"ASR\" && l.language.startsWith(\"eng\"))?.downloadLink}}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "outputPropertyName": "body"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        0
+      ],
+      "id": "e603faba-3909-4d75-89ca-1a7fe882fc35",
+      "name": "Get Transcript"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const subtitles = $json.videoMeta?.subtitleLinks || [];\n\nconst match = subtitles.find(\n  l => l.source === \"ASR\" && l.language?.startsWith(\"eng\")\n);\n\nif (!match?.downloadLink) {\n  return null; // Skip this item if no subtitle link found\n}\n\nreturn {\n  json: {\n    ...$json,\n    subtitleDownloadUrl: match.downloadLink\n  }\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        580,
+        0
+      ],
+      "id": "8239db4e-251b-4855-9789-f05a7d4aebda",
+      "name": "Get Subtitles"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        0
+      ],
+      "id": "70810be3-c3af-448c-8a92-3ffb4b1373eb",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze the following TikTok transcript and determine whether the speaker is primarily describing:\n\n- a **problem** related to the keyword \"{{ $('On form submission').item.json['Keyword To Scrape '] }}\".\n- a **solution** they've found, or\n- **both** a problem and a solution.\n\nThen, rewrite the transcript with the following goals:\n\n1. Frame our product or service \"{{ $('On form submission').item.json['Your Product Description'] }}\" as the ideal solution to the problem, or a key part of the solution being described.\n2. Preserve the speaker’s tone, voice, and informal/social style.\n3. Make it sound like a natural social media post or spoken monologue.\n4. Ensure it's conversational and authentic.\n\n\nTranscript: {{ $json.transcript }}\n\n\n\n\n\n\n\n",
+        "options": {
+          "systemMessage": "=You are a persuasive copywriter skilled at rewriting user-generated content to position a product or service as the solution to customer problems or goals, while preserving the original voice and tone.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1320,
+        160
+      ],
+      "id": "00c9b560-9e50-42dc-b80a-ab6a69aa425e",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-3-7-sonnet-20250219",
+          "cachedResultName": "Claude 3.7 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1320,
+        340
+      ],
+      "id": "b1732e17-1e6b-4df7-96e7-c8a286430ac9",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "caeURtm3tne7cj3i",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        1460,
+        360
+      ],
+      "id": "47b77915-1c46-4360-8241-d19570e30fe5",
+      "name": "Think1"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1aXRi2vdugC2YJ4Up8vSkeDEpbTem9-t8x5m5H7Or9w8",
+          "mode": "list",
+          "cachedResultName": "TikTok Insights",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aXRi2vdugC2YJ4Up8vSkeDEpbTem9-t8x5m5H7Or9w8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1aXRi2vdugC2YJ4Up8vSkeDEpbTem9-t8x5m5H7Or9w8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "New Script": "={{ $json.output }}",
+            "Interesting direct quotes or phrases": "={{ $json.quotes }}",
+            "Triggers or motivating events": "={{ $json.triggers }}",
+            "Desired outcomes": "={{ $json.desiredOutcomes }}",
+            "Pain points": "={{ $json.painPoints }}",
+            "Original Transcription": "={{ $('Code').item.json.transcript }}",
+            "Video URL": "={{ $('Scrape TikTok (Apify)').item.json.webVideoUrl }}"
+          },
+          "matchingColumns": [
+            "Video URL"
+          ],
+          "schema": [
+            {
+              "id": "Video URL",
+              "displayName": "Video URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Original Transcription",
+              "displayName": "Original Transcription",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pain points",
+              "displayName": "Pain points",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Desired outcomes",
+              "displayName": "Desired outcomes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Triggers or motivating events",
+              "displayName": "Triggers or motivating events",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Interesting direct quotes or phrases",
+              "displayName": "Interesting direct quotes or phrases",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Script",
+              "displayName": "New Script",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1840,
+        -20
+      ],
+      "id": "2500745d-6506-4fd1-8ff0-3a0af378a878",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J7Jb3qY6SUr2btZB",
+          "name": "Riverstreet Media Gsheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "instructions": "I want to extract the output from the AI agent into own separate outputs. So extract the pain points, desired outcomes, triggers or motivating events, interesting direct quotes or phrases",
+        "codeGeneratedForPrompt": "I want to extract the output from the AI agent into own separate outputs. So extract the pain points, desired outcomes, triggers or motivating events, interesting direct quotes or phrases",
+        "jsCode": "const items = $input.all();\nconst outputItems = items.map((item) => {\n  const output = item?.json?.output;\n\n  const painPointsIndex = output.indexOf(\"Pain Points\") + \"Pain Points\".length;\n  const desiredOutcomesIndex = output.indexOf(\"Desired Outcomes\");\n  const triggersIndex = output.indexOf(\"Triggers or Motivating Events\");\n  const quotesIndex = output.indexOf(\"Interesting Direct Quotes or Phrases\");\n\n  const painPoints = output.slice(painPointsIndex, desiredOutcomesIndex).trim();\n  const desiredOutcomes = output\n    .slice(desiredOutcomesIndex, triggersIndex)\n    .trim();\n  const triggers = output.slice(triggersIndex, quotesIndex).trim();\n  const quotes = output.slice(quotesIndex).trim();\n\n  return {\n    painPoints,\n    desiredOutcomes,\n    triggers,\n    quotes,\n  };\n});\n\nreturn outputItems;\n"
+      },
+      "type": "n8n-nodes-base.aiTransform",
+      "typeVersion": 1,
+      "position": [
+        1660,
+        -200
+      ],
+      "id": "352a9370-5a15-45f4-8ed3-428cc9aae9c6",
+      "name": "AI Transform"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Scrape TikTok (Apify)": {
+      "main": [
+        [
+          {
+            "node": "Get Subtitles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Scrape TikTok (Apify)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Transcript": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Subtitles": {
+      "main": [
+        [
+          {
+            "node": "Get Transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "AI Transform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Transform": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9544f8c2-b543-446f-90ba-09568e39c2ca",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e0f3afdfa8cdf759f3628c3983ef08ff7c153a90839a4c34ddd866854a12653a"
+  },
+  "id": "3mbPDAuG0pEvRt9I",
+  "tags": []
+}

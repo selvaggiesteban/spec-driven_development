@@ -1,0 +1,67 @@
+{
+  "title": "Advanced Web Development Project Templates",
+  "description": "This repository provides a robust set of project templates designed to streamline the planning, architecture, and development phases of any web project. By combining human-readable Markdown with machine-readable JSON, these templates enable better communication, enforce best practices, and pave the way for powerful automation.",
+  "philosophyAndKeyFeatures": {
+    "title": "Philosophy & Key Features",
+    "introduction": "Our template system is built upon the principle of \"Planning as Code\", ensuring clarity, consistency, and automation readiness:",
+    "points": [
+      {
+        "heading": "Dual-Format Approach",
+        "content": "Each core template exists in two formats: .md (Markdown) for human collaboration, easy reading, and rich documentation; and .json for machine processing, enabling automation scripts and programmatic access to project details."
+      },
+      {
+        "heading": "Best Practices Integrated",
+        "content": "Incorporates modern software development methodologies: Mermaid.js Diagrams, Architectural Decision Records (ADRs), User Stories & Gherkin Criteria, Metadata & Labels."
+      },
+      {
+        "heading": "Actionable Planning",
+        "content": "Transforms static documents into dynamic tools that drive development."
+      }
+    ]
+  },
+  "templateOverview": {
+    "title": "Template Overview",
+    "templates": [
+      {
+        "name": "product-overview.md / product-overview.json",
+        "purpose": "Defines the product vision, core user epics & stories, acceptance criteria, and a phased development roadmap.",
+        "machineValue": "Fuels automated test generation, task creation in project management tools, and initial UI component scaffolding."
+      },
+      {
+        "name": "plan.md / plan.json",
+        "purpose": "Details the technical architecture, including the main tech stack, a Mermaid ER diagram, structured API endpoint definitions, and references to Architectural Decision Records.",
+        "machineValue": "Drives database migration generation, API routing, basic model scaffolding, and environment configuration."
+      },
+      {
+        "name": "resume.md / resume.json",
+        "purpose": "Serves as the Project Kick-off Checklist and Automation Hub. It validates planning completion and provides commands for executing automation scripts.",
+        "machineValue": "Orchestrates the automated setup and initialization of the project, ensuring all preconditions are met."
+      },
+      {
+        "name": "docs/adr/adr-template.md",
+        "purpose": "A template for documenting significant architectural decisions, including context, the decision itself, consequences, and affected project scope.",
+        "machineValue": "Provides structured rationale that can be used by advanced linters or architectural compliance tools."
+      }
+    ]
+  },
+  "gettingStarted": {
+    "title": "Getting Started",
+    "steps": [
+      "Clone this repository: Get the template files onto your local machine.",
+      "Duplicate for a New Project: Copy the entire `templates` directory (or specific files) to your new project folder.",
+      "Fill in the `.md` Templates: Start by defining your project in `product-overview.md` and `plan.md`. Use the placeholders `[ ]` to guide your input.",
+      "Review `resume.md`: This checklist will guide you through validating your planning and preparing for automation.",
+      "(Optional) Implement Automation Scripts: Develop custom scripts (e.g., `npm run generate:scaffold`) that read the `.json` versions of your filled templates to automate repetitive coding tasks."
+    ]
+  },
+  "benefits": {
+    "title": "Benefits for Developers",
+    "points": [
+      "Reduce Ambiguity: Clear, structured planning minimizes misunderstandings.",
+      "Improve Planning Quality: Enforces a systematic approach to project definition.",
+      "Accelerate Development: Automate repetitive setup tasks, freeing up time for core logic.",
+      "Ensure Consistency: Maintain uniform project structures and coding standards.",
+      "Preserve Knowledge: Document decisions and context for long-term project health."
+    ]
+  }
+}

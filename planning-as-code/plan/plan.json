@@ -1,0 +1,159 @@
+{
+  "title": "ARCHITECTURE AND DEVELOPMENT PLAN TEMPLATE - [PROJECT NAME]",
+  "metadata": {
+    "projectType": "[PROJECT TYPE / BRIEF DESCRIPTION]",
+    "version": "1.0",
+    "date": "[DATE]",
+    "techStack": "[MAIN TECH STACK]"
+  },
+  "tableOfContents": [
+    "Executive Summary and Architectural Decisions",
+    "Project Structure",
+    "Complete Data Model",
+    "Technical Implementation by Module",
+    "Role-Based Access Control (RBAC) System",
+    "External Integrations",
+    "Development Phases and Roadmap",
+    "Security Considerations",
+    "Infrastructure and DevOps",
+    "Validation Checklist",
+    "Pending Decisions"
+  ],
+  "sections": {
+    "executiveSummaryAndArchitecturalDecisions": {
+      "title": "1. EXECUTIVE SUMMARY AND ARCHITECTURAL DECISIONS",
+      "projectOverview": {
+        "title": "1.1 Project Overview",
+        "description": "[PROJECT NAME] is a [SYSTEM TYPE, e.g., SaaS, Mobile App, Web Platform] designed for [PROJECT'S MAIN GOAL].",
+        "features": [
+          { "feature": "[Key Feature A]", "description": "[Description of Feature A]." },
+          { "feature": "[Key Feature B]", "description": "[Description of Feature B]." },
+          { "feature": "[Key Feature C]", "description": "[Description of Feature C]." },
+          { "feature": "[Key Feature D]", "description": "[Description of Feature D]." },
+          { "feature": "[Key Feature E]", "description": "[Description of Feature E]." },
+          { "feature": "[Key Feature F]", "description": "[Description of Feature F]." }
+        ]
+      },
+      "fundamentalArchitecturalDecisions": {
+        "title": "1.2 Fundamental Architectural Decisions",
+        "mainTechnologyStack": {
+          "title": "A. Main Technology Stack",
+          "description": "[Detail the chosen tech stack here: language, framework, database, etc.]"
+        },
+        "architecturalDecisionRecords": {
+          "title": "B. Architectural Decision Records (ADRs)",
+          "description": "Key architectural decisions for this project are documented as Architectural Decision Records (ADRs) in the `/docs/adr` directory. Refer to ADR-001, ADR-002, etc., for detailed context, decisions, and consequences. (ADR template now includes a 'Scope' section for machine readability.)"
+        }
+      }
+    },
+    "completeDataModel": {
+      "title": "3. COMPLETE DATA MODEL",
+      "entityRelationshipDiagram": {
+        "title": "3.1 Entity-Relationship Diagram",
+        "mermaidSyntax": "erDiagram\n    ENTITY_A ||--o{ ENTITY_B : \"has\"\n    ENTITY_B ||--|{ ENTITY_C : \"contains\"\n    ENTITY_A {\n        UUID id PK \"NOT NULL UNIQUE\"\n        string name \"NOT NULL\"\n        text description \"NULL\"\n        timestamp created_at \"NOT NULL\"\n        timestamp updated_at \"NOT NULL\"\n    }\n    ENTITY_B {\n        UUID id PK \"NOT NULL UNIQUE\"\n        string title \"NOT NULL\"\n        UUID entity_a_id FK \"NOT NULL\"\n        boolean is_active \"DEFAULT TRUE\"\n        timestamp created_at \"NOT NULL\"\n        timestamp updated_at \"NOT NULL\"\n    }\n    ENTITY_C {\n        UUID id PK \"NOT NULL UNIQUE\"\n        string detail \"NOT NULL\"\n        UUID entity_b_id FK \"NOT NULL\"\n        timestamp created_at \"NOT NULL\"\n        timestamp updated_at \"NOT NULL\"\n    }",
+        "note": "[Replace the example above with your project's actual ER diagram. Use Markdown preview or GitHub to render.]"
+      },
+      "mainTables": {
+        "title": "3.2 Main Tables with Detailed Fields",
+        "modules": [
+          {
+            "name": "[Module Name 1, e.g., User Management] Module",
+            "tables": [
+              { "name": "table_1", "description": "[Fields and description]." },
+              { "name": "table_2", "description": "[Fields and description]." }
+            ]
+          },
+          {
+            "name": "[Module Name 2, e.g., Content] Module",
+            "tables": [
+              { "name": "table_3", "description": "[Fields and description]." },
+              { "name": "table_4", "description": "[Fields and description]." }
+            ]
+          }
+        ]
+      }
+    },
+    "technicalImplementationByModule": {
+      "title": "4. TECHNICAL IMPLEMENTATION BY MODULE (SUMMARY)",
+      "modules": [
+        {
+          "name": "Administration Module",
+          "features": [
+            { "feature": "[Admin Feature A]", "implementation": "[Brief description of technical implementation]." },
+            { "feature": "[Admin Feature B]", "implementation": "[Brief description of technical implementation]." }
+          ]
+        },
+        {
+          "name": "End User Module",
+          "features": [
+            { "feature": "[User Feature A]", "implementation": "[Brief description of technical implementation]." },
+            { "feature": "[User Feature B]", "implementation": "[Brief description of technical implementation]." }
+          ]
+        }
+      ],
+      "apiEndpoints": {
+        "title": "4.3 API Endpoints (Per Module)",
+        "note": "[Define key API endpoints for each module, specifying HTTP method, path, and expected parameters. This enables automated routing and basic API client generation.]",
+        "modules": [
+          {
+            "name": "[Module Name, e.g., User Module]",
+            "endpoints": [
+              {
+                "method": "POST",
+                "path": "/api/[module-plural]",
+                "description": "Create Entity",
+                "requestBody": "{ \"field1\": \"type\", \"field2\": \"type\" }",
+                "response": "201 Created"
+              },
+              {
+                "method": "GET",
+                "path": "/api/[module-plural]/{id}",
+                "description": "Get Single Entity",
+                "response": "200 OK, { \"id\": \"uuid\", ... }"
+              },
+              {
+                "method": "PUT",
+                "path": "/api/[module-plural]/{id}",
+                "description": "Update Entity",
+                "requestBody": "{ \"field1\": \"new_value\" }",
+                "response": "200 OK"
+              },
+              {
+                "method": "DELETE",
+                "path": "/api/[module-plural]/{id}",
+                "description": "Delete Entity",
+                "response": "204 No Content"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "pendingDecisions": {
+      "title": "11. PENDING DECISIONS (Awaiting Confirmation)",
+      "description": "To finalize the project scope, the following points need clarification:",
+      "topics": [
+        {
+          "topic": "[Topic A]",
+          "questions": [
+            "[Specific question 1 about Topic A].",
+            "[Specific question 2 about Topic A]."
+          ]
+        },
+        {
+          "topic": "[Topic B]",
+          "questions": [
+            "[Specific question 1 about Topic B]."
+          ]
+        },
+        {
+          "topic": "[Topic C]",
+          "questions": [
+            "[Specific question 1 about Topic C].",
+            "[Specific question 2 about Topic C]."
+          ]
+        }
+      ]
+    }
+  }
+}

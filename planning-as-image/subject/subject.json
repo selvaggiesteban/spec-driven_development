@@ -1,0 +1,172 @@
+{
+  "subject_profile": {
+    "type": "human",
+    "subject_type": "male",
+    "gender_presentation": "masculine",
+    "age": "young adult",
+    "age_range": "young adult",
+    "apparent_age_range": "young adult",
+    "description": "A young woman taking a medium close-up selfie inside a house, holding the phone with one hand and looking directly into the camera with a confident, expressive gaze. Same outfit and accessories as reference.",
+
+    "skin": {
+      "tone": "light to light-olive, neutral-warm",
+      "range": "light-to-medium",
+      "undertone": "neutral-warm (slight olive)",
+      "texture": [
+        "visible pores (cheeks/nose)",
+        "natural micro-creases under eyes",
+        "subtle under-eye shadows",
+        "realistic facial sheen (not plastic)",
+        "light natural blemishes allowed"
+      ],
+      "surface_detail": [
+        "natural pores visible",
+        "subtle under-eye darkness",
+        "mild natural redness around nose/cheeks (intermittent)",
+        "realistic lip texture"
+      ],
+      "skin_texture_enhancement": [
+        "dark and visible pores",
+        "micro-creases with wrinkles",
+        "small peach fuzz",
+        "natural blemishes",
+        "subtle reddish cast",
+        "soft dryness on lips and nose",
+        "micro lines near nasolabial"
+      ]
+    },
+
+    "face": {
+      "preserve_original": true,
+      "reference_match": true,
+      "facial_emphasis": "strong defined facial features, sharper cheekbones, clean jawline",
+      "makeup": "natural sunkissed glow, glossy nude lips, soft highlight on nose and cheekbones",
+
+      "face_shape": {
+        "overall": "oval leaning oblong",
+        "jaw": "defined jawline, not overly square",
+        "jawline": "clean, defined, slightly angular",
+        "chin": "rounded-to-soft point",
+        "cheekbones": "moderately high, defined"
+      },
+
+      "eyes": {
+        "color": "hazel-green (green/olive with warm flecks)",
+        "shape": "almond, slightly hooded",
+        "eyelids": "slightly hooded/relaxed",
+        "gaze": "calm, direct or slightly lowered depending on scene",
+        "gaze_character": "calm, slightly heavy-lidded in relaxed expression"
+      },
+
+      "eyebrows": {
+        "density": "thick/full",
+        "color": "dark brown/black",
+        "shape": "mostly straight with mild natural arch",
+        "features": [
+          "strong brow presence",
+          "inner brow slightly fuller"
+        ]
+      },
+
+      "nose": {
+        "bridge": "straight",
+        "tip": "rounded",
+        "projection": "moderate",
+        "nostrils": "medium, more visible in low-angle shots"
+      },
+
+      "lips": {
+        "fullness": "full",
+        "shape": "full, defined cupid's bow",
+        "upper_lip": "defined but not sharp cupid's bow",
+        "lower_lip": "fuller than upper",
+        "color": "natural pink",
+        "finish": "natural (no heavy gloss unless specified)"
+      }
+    },
+
+    "hair": {
+      "color": "brown",
+      "texture": "curly/wavy tight curls",
+      "length": "short-to-medium on top",
+      "volume": "medium-high on top",
+      "style": "long straight hair falling over shoulders",
+      "hairline": "natural, slightly irregular baby hairs, not sharply lined",
+      "micro_details": [
+        "few strands brushing against the cheek",
+        "soft natural shine from window light"
+      ]
+    },
+
+    "facial_hair": {
+      "type": "short stubble",
+      "density": "medium",
+      "distribution": [
+        "visible mustache",
+        "denser along jawline and chin",
+        "lighter on upper cheeks"
+      ],
+      "edge": "natural (not barber-sharp)",
+      "mustache": "light-to-medium stubble",
+      "jaw": "stubble more visible along jawline"
+    },
+
+    "expression": "soft confident look, relaxed eyes, slight natural pout",
+
+    "clothing": {
+      "top": {
+        "type": "ribbed knit cami top",
+        "color": "white",
+        "details": "cropped fit, thin straps, small dainty bow at neckline"
+      },
+      "bottom": {
+        "type": "denim jeans",
+        "color": "light wash blue",
+        "details": "relaxed fit, subtle texture visible near waistband"
+      }
+    },
+
+    "distinctive_details": [
+      "thick eyebrows + hazel-green eyes combo",
+      "full lips",
+      "dark curly hair with volume",
+      "light stubble with mustache emphasis"
+    ],
+
+    "distinctive_notes": [
+      "strong eyebrow presence",
+      "hazel-green eyes stand out",
+      "defined jaw + full lips combination"
+    ],
+
+    "identity_lock_guidelines": {
+      "preserve": [
+        "hazel-green eye color",
+        "thick eyebrows",
+        "dark curly hair texture",
+        "lip fullness",
+        "natural stubble pattern"
+      ],
+      "avoid": [
+        "changing eye color to blue/brown",
+        "over-smoothing skin (plastic look)",
+        "adding heavy beard or removing all facial hair unless requested",
+        "altering nose proportions dramatically",
+        "cartoon/anime styling unless requested"
+      ]
+    },
+
+    "default_negative_prompt": [
+      "over-smoothed skin",
+      "plastic face",
+      "incorrect facial proportions",
+      "deformed eyes",
+      "wrong eye color",
+      "extra teeth",
+      "warped lips",
+      "distorted jawline",
+      "artificial doll-like skin",
+      "over-sharpened halos"
+    ]
+  }
+}

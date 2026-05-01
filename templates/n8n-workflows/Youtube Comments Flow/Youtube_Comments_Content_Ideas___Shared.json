@@ -1,0 +1,739 @@
+{
+  "name": "Youtube Comments Content Ideas - Shared",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/mExYO4A2k9976zMfA/run-sync-get-dataset-items",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer KEYHERE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"customMapFunction\": \"(object) => { return {...object} }\",\n  \"maxItems\": {{ $json['How Many Comments To Scrape'] }},\n  \"sort\": \"top\",\n  \"startUrls\": [\n    \"{{ $json['Youtube URL'] }}\"\n  ]\n} ",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1260,
+        140
+      ],
+      "id": "c2661a5f-009a-49de-81c0-d985c5947d26",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful, intelligent content writing assistant. \n\nPlease review the following comment.\n\nComment: {{ $json.text }}"
+            },
+            {
+              "content": "=# Overview  \nYou are an AI agent responsible for analyzing YouTube comments and determining whether they they contain a relevant idea, insight, or opportunity that could be transformed into engaging content or advertising material for {{ $('On form submission').item.json['Brand Name'] }}\n\n## Context  \n{{ $('On form submission').item.json['Brand Info'] }}\n\n## Instructions  \n1. Read the YouTube comment provided via input.  \n2. Evaluate whether the comment contains one or more of the following types of content or advertising opportunities:  \n   - Educational tutorials.\n   - Content marketing angles.\n   - Product demos or walkthroughs.\n   - Audience questions and pain points.\n   - Creative advertising themes.\n3. Output only:  \n   - \"Yes\" → if there is a viable content or advertising idea.  \n   - \"No\" → if the comment does not suggest a topic Nolan could turn into a video.  \n\n## Tools  \n- Input: `{{ $json.text }}`  \n\n## Examples  \n- Input: \"This would be a game changer for people with sensitive skin like me.\"  \n  Output: Yes  \n\n- Input: \"Does this actually help with muscle recovery or is it just marketing fluff?\"  \n  Output: Yes  \n\n- Input: \"I wish there was a version of this that didn’t leave a sticky feeling after use.\"  \n  Output: Yes  \n\n- Input: \"Looks great! Just ordered\"  \n  Output: No  \n\n- Input: \"Subscribed.\"  \n  Output: No  \n\n- Input: \"OMG I need this in pink!!\"  \n  Output: Yes  \n\n## SOP (Standard Operating Procedure)  \n1. Parse the YouTube comment from `{{ $json.text }}`.  \n2. Review the content against the relevance checklist under Instructions.  \n3. Assess whether the comment aligns with Nolan’s expertise or the channel’s core topics.  \n4. Output \"Yes\" or \"No\" based on the presence or absence of content opportunity.  \n\n## Final Notes  \n- Emphasize comments that offer insight into real customer desires, frustrations, objections, or use cases related to the product or category.  \n- Avoid tagging generic compliments, one-word hype, or unrelated chatter as relevant.\n- Favor inclusion if the comment can inspire a hook, testimonial-style message, product benefit highlight, UGC script, or positioning angle.  \n---",
+              "role": "system"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -1040,
+        140
+      ],
+      "id": "735080c7-57b0-4ba4-9638-50369e96d31c",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "oh0Z4G6r5neaRiER",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1bXjUnYb2QWgixntL9zFBnHnq9W1hMy2HvKDIWkmG3F8",
+          "mode": "list",
+          "cachedResultName": "Youtube Comments Sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bXjUnYb2QWgixntL9zFBnHnq9W1hMy2HvKDIWkmG3F8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 647212516,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bXjUnYb2QWgixntL9zFBnHnq9W1hMy2HvKDIWkmG3F8/edit#gid=647212516"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('HTTP Request').item.json.id }}",
+            "likeCount": "={{ $('HTTP Request').item.json.likeCount }}",
+            "text": "={{ $('HTTP Request').item.json.text }}",
+            "replyCount": "={{ $('HTTP Request').item.json.replyCount }}",
+            "publishedTime": "={{ $('HTTP Request').item.json.publishedTime }}",
+            "author": "={{ $('HTTP Request').item.json.author }}",
+            "type": "={{ $('HTTP Request').item.json.type }}",
+            "contentIdea": "={{ $('OpenAI').item.json.choices }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "text",
+              "displayName": "text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "likeCount",
+              "displayName": "likeCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "replyCount",
+              "displayName": "replyCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "publishedTime",
+              "displayName": "publishedTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contentIdea",
+              "displayName": "contentIdea",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "topic",
+              "displayName": "topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "research",
+              "displayName": "research",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hook",
+              "displayName": "hook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "outline",
+              "displayName": "outline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -440,
+        140
+      ],
+      "id": "3c80c295-070d-49b0-bfd1-4d492d6a74a4",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J7Jb3qY6SUr2btZB",
+          "name": "Riverstreet Media Gsheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8035c7a-4a27-48b6-8632-93120cdf4b32",
+              "leftValue": "={{ $json.choices[0].message.content.output }}",
+              "rightValue": "Yes",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -660,
+        140
+      ],
+      "id": "8fbe7409-50bf-43c7-b7e5-c825e8ae9c62",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -220,
+        140
+      ],
+      "id": "a357fdcb-6efc-4fb9-bac5-a8eeb37e8e62",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful content creator assistant. \nTopic:  {{ $json.choices[0].message.content.topic }}\nResearch: {{ $json.choices[0].message.content.research_overview }}"
+            },
+            {
+              "content": "=# Overview  \nYou are an AI agent tasked with transforming a researched product insight or consumer trend into a compelling ad-ready concept. Your responsibilities include crafting a high-impact messaging hook and structuring a narrative outline to support creative development.\n\n\n## Context  \n- The input includes details like brand name, product type, target audience, and positioning.\n- You also receive a marketing angle and a 300–500 word research overview generated by a previous agent.\n- Your role is to create a marketing concept specific to the brand’s identity and product niche.  \n- The output is designed to help copywriters or advertisers shape high-converting ad scripts, headlines, or UGC scripts.\n- The tone should reflect the brand’s vibe (modern, premium, playful, etc.) while staying customer-centered and insight-driven.\n\n## Instructions  \n1. Read the `angle` and `research_overview`.  \n2.Generate a one-sentence hook that captures buyer attention and reflects the brand’s positioning or key benefit.\n3. Create a 3–6 bullet outline that expands on the insight in a persuasive, structured way that could fuel ad creative or UGC script\n4. Output your results in JSON format with two keys: `hook` and `outline`.  \n\n## Tools  \n- None (uses only provided data)\n\n## Examples  \n- Input:  \n```json\n{\n  \"angle\": \"Convenient Travel-Size Skincare: Why Compact Packaging Wins Over Modern Consumers\",\n  \"research_overview\": \"As air travel rebounds post-pandemic, the demand for TSA-compliant skincare and wellness products is surging...\"\n}\n```\n\n- Output:  \n```json\n{\n  \"hook\": \"Finally — hydration that flies with you. ✈️\",\n  \"outline\": [\n      \"Why travel disrupts your skincare (dehydration, TSA limits)\",\n    \"The growing demand for on-the-go beauty essentials\",\n    \"How GlowJet’s compact mist solves a major travel problem\",\n    \"Formulated for hydration, not just hype\",\n    \"Perfect for gym bags, red-eyes, and carry-ons\",\n    \"CTA: Try GlowJet — your skin's in-flight upgrade\"\n  ]\n}\n```\n\n## SOP (Standard Operating Procedure)  \n1. Ingest the `angle` and `research_overview`.  \n2. Write a hook that speaks directly to the brand’s audience and value proposition. \n3. Outline 3–6 persuasive points, moving from insight to benefit to solution. \n5. Output in strict JSON format with the keys: `angle` and `outline`.\n\n## Final Notes  \n- Avoid fluff or generic intros—each outline point should deliver actionable or intriguing substance.  \n- Favor specificity and emotional resonance over generic phrasing.\n- Think like a DTC copywriter: each line should reveal a pain point, unlock desire, or highlight a differentiator.  \n---\n",
+              "role": "system"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        380,
+        0
+      ],
+      "id": "5ec3c5eb-e2b6-4d93-9469-48c4c992c6b2",
+      "name": "OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "oh0Z4G6r5neaRiER",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful research assistant.  \n\nYouTube comment to analyze: {{ $json.text }}"
+            },
+            {
+              "content": "=# Overview  \nYou are an AI agent specialized in extracting marketing-relevant angles from YouTube comments and performing real-time research to support ad creative development for DTC and e-commerce brands.\n\n\n## Objectives:  \n1. Analyze the YouTube comment to identify a product-specific insight or idea — such as a pain point, objection, curiosity, product use case, or social proof moment.  \n2. Convert that insight into a clear, ad-worthy messaging angle.  \n3. Use the Tavily tool to conduct up-to-date research on the topic or trend behind the insight (e.g., ingredients, cultural relevance, buyer behavior, competitor claims, etc.).\n\nBased on your findings, return a structured JSON object that includes:\n- `angle`: A compelling advertising or messaging hook based on the comment  \n- `research_overview`: A 300–500 word summary that:  \n  - Expands on the insight with recent, credible information  \n  - Includes stats, examples, or trend references (cite sources like “according to [source]”)  \n  - Maintains a persuasive but balanced tone, ideal for informing copywriters or ad strategists  \n  - Highlights why this angle matters in the context of consumer psychology, product differentiation, or timing  \n\n## Output Instructions:  \n- Your ONLY output should be a JSON object with the keys: `angle` and `research_overview`.  \n- Do not include any setup text, notes, or formatting outside of the JSON object.  \n- Ensure the `research_overview` is 300–500 words, fact-based, and relevant to paid ad storytelling or DTC messaging.\n\n\n## Example Workflow:  \n1) Receive comment: “I wish this cream came in travel size — I hate carrying my full bottle on flights.”  \n2) Extract angle: “Convenient Travel-Friendly Version for On-the-Go Customers”  \n3) Use Tavily to research the rise of travel-sized skincare, TSA regulations, buyer demand, etc.  \n4) Return:\n```json\n{\n  \"angle\": \"Convenient Travel-Size Skincare: Why Compact Packaging Wins Over Modern Consumers\",\n  \"research_overview\": \"As air travel rebounds post-pandemic, the demand for TSA-compliant skincare and wellness products is surging. According to Allied Market Research, the global travel-size personal care market is expected to reach $3.6 billion by 2027...\"\n}",
+              "role": "system"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a1b697bb-ed07-44c4-a9bb-ae7dd7ea2f7f",
+      "name": "OpenAI2",
+      "credentials": {
+        "openAiApi": {
+          "id": "oh0Z4G6r5neaRiER",
+          "name": "John"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1bXjUnYb2QWgixntL9zFBnHnq9W1hMy2HvKDIWkmG3F8",
+          "mode": "list",
+          "cachedResultName": "Youtube Comments Sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bXjUnYb2QWgixntL9zFBnHnq9W1hMy2HvKDIWkmG3F8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 647212516,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bXjUnYb2QWgixntL9zFBnHnq9W1hMy2HvKDIWkmG3F8/edit#gid=647212516"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('HTTP Request').item.json.id }}",
+            "hook": "={{ $json.choices[0].message.content.hook }}",
+            "outline": "={{ $json.choices[0].message.content.outline }}",
+            "topic": "={{ $('OpenAI2').item.json.choices[0].message.content.angle }}",
+            "research": "={{ $('OpenAI2').item.json.choices[0].message.content.research_overview }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "text",
+              "displayName": "text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "likeCount",
+              "displayName": "likeCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "replyCount",
+              "displayName": "replyCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "publishedTime",
+              "displayName": "publishedTime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "contentIdea",
+              "displayName": "contentIdea",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "topic",
+              "displayName": "topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "research",
+              "displayName": "research",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hook",
+              "displayName": "hook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "outline",
+              "displayName": "outline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        760,
+        140
+      ],
+      "id": "28e2ec7b-59a4-4d86-a978-fabf521c7267",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "J7Jb3qY6SUr2btZB",
+          "name": "Riverstreet Media Gsheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to search the web. ",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "Authorization",
+              "valueProvider": "fieldValue",
+              "value": "Bearer APIKEYHERE"
+            },
+            {
+              "name": "Content-Type",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"query\": \"{searchTerm}\",\n  \"topic\": \"general\",\n  \"search_depth\": \"advanced\",\n  \"chunks_per_source\": 3,\n  \"max_results\": 1,\n  \"time_range\": null,\n  \"days\": 7,\n  \"include_answer\": true,\n  \"include_raw_content\": false,\n  \"include_images\": false,\n  \"include_image_descriptions\": false,\n  \"include_domains\": [],\n  \"exclude_domains\": []\n}",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "searchTerm",
+              "description": "what the user is searching for information on. "
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        100,
+        160
+      ],
+      "id": "ec16902a-86e0-45de-9e2b-c5c960e3c868",
+      "name": "Tavily"
+    },
+    {
+      "parameters": {
+        "formTitle": "Youtube Comments Scraper ",
+        "formDescription": "Drop the Youtube video URL and specify how many comments you want to scrape then specify brand info. ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Youtube URL",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "How Many Comments To Scrape",
+              "placeholder": "100",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Brand Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Brand Info",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -1500,
+        140
+      ],
+      "id": "b992ea46-b253-458e-99a0-3d0f64bfe42c",
+      "name": "On form submission",
+      "webhookId": "f6689698-c52d-413b-ba5a-d19334c73d8b"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "OpenAI2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI2": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a3130eff-5a97-4777-bcf4-61f949075688",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e0f3afdfa8cdf759f3628c3983ef08ff7c153a90839a4c34ddd866854a12653a"
+  },
+  "id": "ZOFrzPUFk0kByrW0",
+  "tags": []
+}
