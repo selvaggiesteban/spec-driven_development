@@ -1,63 +1,47 @@
-# Spec-Driven Development (SDD) Workspace
+# Spec-Driven Development (SDD)
 ![SDD Status](https://img.shields.io/badge/Status-Operational-brightgreen?style=for-the-badge)
-![Author](https://img.shields.io/badge/Author-Esteban_Selvaggi-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)
 
-## 🚀 The Mission: "Architecture First, Code Second"
-Welcome to the **Spec-Driven Development (SDD)** ecosystem. This repository serves as a master collection of frameworks, templates, and plugins designed under a strict **SDD methodology**. We prioritize technical specifications and rigorous planning to ensure high-performance, scalable, and maintainable software delivery.
+## 🚀 Misión: "Arquitectura Primero, Código Después"
+Bienvenido al ecosistema de **Spec-Driven Development (SDD)**. Este repositorio centraliza los frameworks, plantillas y metodologías diseñadas bajo un estándar de ingeniería estricto donde la planificación precede a la ejecución.
 
-This is a consolidated workspace for projects that transform abstract requirements into executable engineering blueprints.
+SDD transforma requerimientos abstractos en planos de ingeniería ejecutables, garantizando software escalable, mantenible y de alto rendimiento mediante el uso de **Planning-as-Code**.
 
 ---
 
-## 🏗️ Repository Architecture
-The workspace is organized into core functional modules:
+## 🏗️ Estructura del Ecosistema SDD
+El repositorio se divide en pilares fundamentales de desarrollo:
 
-### 1. 🤖 Intelligence Frameworks
-*   **[hands-on-ai](./hands-on-ai)**: A domain-driven AI framework for orchestrating complex development and marketing workflows.
-*   **[planning-as-code](./planning-as-code)**: Treating system architecture and roadmaps as versioned source code.
-*   **[planning-as-image](./planning-as-image)**: Visual-first strategic mapping for human-AI collaboration.
+### 1. 🤖 Frameworks de Inteligencia
+*   **hands-on-ai**: Framework para la orquestación de flujos de desarrollo y marketing impulsados por IA.
+*   **planning-as-code**: Metodología para tratar la arquitectura del sistema y los roadmaps como código fuente versionado.
+*   **planning-as-image**: Mapeo visual estratégico para la colaboración entre humanos y sistemas inteligentes.
 
-### 2. 🔌 WordPress Ecosystem
-A suite of high-performance plugins optimized for SEO and modern web standards:
-*   **[SEO Article Generator](./wordpress/wp-content/plugins/SEO-article-generator)**: AI-powered content strategy and generation.
-*   **[WC Advanced Filter](./wordpress/wp-content/plugins/wc-advanced-filter)**: High-performance product filtering for WooCommerce.
-*   **[Health Checker](./wordpress/wp-content/plugins/wp-health-checker)**: Proactive monitoring for WordPress integrity.
+### 2. 🔌 Ecosistema WordPress (Sovereign Plugins)
+Plugins de alto rendimiento optimizados para SEO y estándares modernos:
+*   **SEO Article Generator**: Estrategia y generación de contenido asistida por IA.
+*   **WC Advanced Filter**: Filtrado de productos de alto rendimiento para WooCommerce.
+*   **Health Checker**: Monitoreo proactivo de la integridad de sitios WordPress.
 
-### 3. 🎨 High-Conversion Templates
-*   **[n8n-workflows](./templates/n8n-workflows)**: A massive library of industrial-grade automation blueprints.
-*   **[Responsive Slick Carousel](./templates/responsive-slick-carousel)**: Optimized UI components for modern web.
-*   **[Web Dev Guide](./web-dev-guide)**: The master standard for building modern web applications.
-
----
-
-## 📜 Engineering Standards
-All modules within this repository adhere to the **Esteban Selvaggi Engineering Standards**:
-*   **Logic:** 100% English source code (variables, functions, classes).
-*   **Context:** Detailed comments and documentation in Spanish.
-*   **Security:** Zero-trust architecture. Secrets strictly managed via `.env` (never committed).
-*   **Naming:** `snake_case` for Python and `camelCase` for JS/TS.
+### 3. 🎨 Plantillas de Alta Conversión
+*   **n8n-workflows**: Librería masiva de planos de automatización de grado industrial.
+*   **Responsive Slick Carousel**: Componentes UI optimizados para la web moderna.
+*   **Web Dev Guide**: El estándar maestro para la construcción de aplicaciones web modernas.
 
 ---
 
-## 🛠️ Quick Start
-1.  **Clone the master repo:**
-    ```bash
-    git clone https://github.com/selvaggiesteban/spec-driven_development.git
-    ```
-2.  **Navigate to a module:**
-    ```bash
-    cd spec-driven_development/hands-on-ai
-    ```
-3.  **Setup Environment:**
-    Copy `.env.template` to `.env` and configure your credentials.
+## 📜 Estándares de Ingeniería (The Selvaggi Standard)
+*   **Logic (English)**: Lógica de programación, nombres de variables y estructuras en inglés.
+*   **Context (Spanish)**: Documentación, comentarios y contexto estratégico en español.
+*   **Security**: Protección absoluta de credenciales. Uso mandatorio de `.env` (excluidos de Git).
+*   **Structure**: Composición sobre herencia y tipos explícitos para integridad estructural.
 
 ---
 
-## 👨‍💻 Author & Vision
+## 👨‍💻 Autor
 **Esteban Selvaggi**  
-Digital Architect & Software Engineer specializing in SDD and Autonomous AI Systems.  
-🌐 [selvaggiesteban.dev](https://selvaggiesteban.dev)
+Digital Architect & Software Engineer.  
+🌐 [selvaggiesteban.dev](https://selvaggiesteban.dev)  
+🔗 [LinkedIn](https://www.linkedin.com/in/selvaggiesteban/)
 
 ---
-*Built for the next generation of digital excellence.*
+*Construyendo la próxima generación de excelencia digital.*
